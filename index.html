@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#0b0d12">
+  <meta name="description" content="Pocket 404 DX Complete Adventure Edition: aventura 16-bit local-first con 7 dungeons, 7 runas activas, 7 armas, 37 enemigos, secretos, finales y New Game+.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; font-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Pocket 404 DX · v6.1.0 · Complete Adventure Edition</title>
+  <link rel="manifest" href="manifest.webmanifest?v=6.1.0">
+  <link rel="icon" href="assets/icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/app.css?v=6.1.0">
+</head>
+<body>
+  <a class="skip" href="#main">Saltar al contenido</a>
+  <div class="scanlines" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="./" id="homeLink" aria-label="Pocket 404 DX, inicio">
+      <span class="brand-mark">404</span>
+      <span><strong>POCKET 404 DX</strong><small>COMPLETE ADVENTURE EDITION · v6.1.0</small></span>
+    </a>
+    <nav class="top-actions" aria-label="Acciones principales">
+      <button id="settingsBtn" class="ghost" type="button">AJUSTES</button>
+      <button id="helpBtn" class="ghost" type="button">AYUDA</button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section id="hubView" class="view hub-view">
+      <div class="hero-panel pixel-frame">
+        <div class="handheld-showcase" aria-hidden="true">
+          <div class="handheld-demo">
+            <div class="demo-brandline"><b>POCKET 404</b><span>COMPLETE ADVENTURE EDITION<br>ADVENTURE ANYWHERE</span></div>
+            <div class="demo-screen-frame"><div class="demo-screen">
+              <div class="demo-hud"><span class="demo-hearts">♥♥♥♡</span><span>◆ ×042</span></div>
+              <i class="demo-moon"></i><i class="demo-castle"></i><i class="demo-arch"></i><i class="demo-platform"></i><i class="demo-hero"></i><i class="demo-skeleton"></i><i class="demo-chest"></i>
+            </div></div>
+            <div class="demo-controls"><div class="demo-dpad"></div><div class="demo-action"><i>B</i><i>A</i></div></div><div class="demo-select"><i></i><i></i></div>
+          </div>
+        </div>
+        <div class="hero-copy">
+          <p class="eyebrow">RUNE QUEST 404 DX · COMPLETE ADVENTURE EDITION</p>
+          <h1>A whole world.<br><span>Inside the browser.</span></h1>
+          <p>Action-adventure 16-bit original: overworld explorable, Bellwether, cuevas, rutas bloqueadas por herramientas, 7 dungeons, 7 runas, side quests, secretos, jefes, final y créditos. Local-first, sin ROMs ni telemetría.</p>
+          <div class="hero-actions">
+            <button id="continueBtn" class="primary" type="button">CONTINUAR AVENTURA</button>
+            <button id="newGameBtn" class="secondary" type="button">NUEVA PARTIDA</button>
+          </div>
+        </div>
+      </div>
+
+      <section class="stats-strip" aria-label="Progreso de Rune Quest">
+        <div><span id="progressPct">0%</span><small>CAMPAÑA</small></div>
+        <div><span id="runesCount">0/7</span><small>RUNAS</small></div>
+        <div><span id="toolsCount">0/6</span><small>HERRAMIENTAS</small></div>
+        <div><span id="secretsCount">0</span><small>SECRETOS</small></div>
+        <div><span id="achCount">0/16</span><small>LOGROS</small></div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-head"><div><p class="eyebrow">DX LIBRARY</p><h2>Remakes premium</h2></div><p>Rune Quest abandona la selección lineal de capítulos: la aventura principal se recorre caminando por Veyra y entrando en sus santuarios desde el propio mundo.</p></div>
+        <div id="gameGrid" class="game-grid"></div>
+      </section>
+
+      <section class="section-block roadmap">
+        <div class="section-head"><div><p class="eyebrow">ROADMAP</p><h2>De prototipo a aventura</h2></div></div>
+        <ol>
+          <li class="done"><b>v3.0</b><span>Motor DX + campaña base</span></li>
+          <li class="done"><b>v3.1</b><span>Handheld Edition · identidad 8-bit</span></li>
+          <li class="done"><b>v3.2</b><span>Adventure Edition · mapa, runas y guardianes</span></li>
+          <li class="done"><b>v4.0</b><span>World Edition · overworld, 7 dungeons, herramientas, side quests y créditos</span></li>
+          <li class="done"><b>v5.0</b><span>16-Bit Definitive Edition · sprites, tiles, FX y HUD renovados</span></li>
+          <li><b>v5.x</b><span>Pulido post-release, accesibilidad y contenido opcional</span></li>
+        </ol>
+      </section>
+    </section>
+
+    <section id="campaignView" class="view campaign-view hidden" aria-labelledby="campaignTitle">
+      <div class="campaign-head">
+        <button id="campaignBackBtn" class="ghost" type="button">← HUB</button>
+        <div><p class="eyebrow">RUNE QUEST 404 DX</p><h1 id="campaignTitle">Veyra · World Adventure</h1></div>
+        <button id="resetCampaignBtn" class="danger-ghost" type="button">BORRAR SLOT</button>
+      </div>
+
+      <section class="adventure-launch pixel-frame" aria-labelledby="launchTitle">
+        <div><p class="eyebrow">SAVE SLOTS</p><h2 id="launchTitle">Tu aventura</h2><p id="slotStatus">Slot 1</p></div>
+        <div id="slotGrid" class="slot-grid" aria-label="Ranuras de guardado"></div>
+        <div class="launch-actions"><button id="exploreWorldBtn" class="primary" type="button">EXPLORAR VEYRA</button><button id="newSlotGameBtn" class="secondary" type="button">NUEVA PARTIDA EN ESTE SLOT</button></div>
+      </section>
+
+      <section class="world-map-panel pixel-frame" aria-labelledby="mapTitle">
+        <div class="section-head"><div><p class="eyebrow">OVERWORLD</p><h2 id="mapTitle">Mapa de Veyra</h2></div><p>Solo muestra lugares descubiertos. Las rutas bloqueadas se abren usando herramientas dentro del mundo.</p></div>
+        <div id="worldMap" class="world-map" aria-label="Mapa de Veyra"></div>
+      </section>
+
+      <section class="inventory-panel pixel-frame" aria-labelledby="inventoryTitle">
+        <div class="section-head"><div><p class="eyebrow">INVENTORY</p><h2 id="inventoryTitle">Equipo y progresión</h2></div><p>Las herramientas cambian el mapa: vuelve a regiones antiguas para abrir rutas y secretos.</p></div>
+        <div class="inventory-columns"><div><h3>HERRAMIENTAS</h3><div id="toolGrid" class="inventory-grid"></div></div><div><h3>RUNAS</h3><div id="runeInventory" class="inventory-grid"></div></div><div><h3>ARMAS</h3><div id="weaponInventory" class="inventory-grid"></div></div><div><h3>RELIQUIAS</h3><div id="relicInventory" class="inventory-grid"></div></div></div>
+      </section>
+
+      <section class="story-panel pixel-frame" aria-labelledby="storyTitle">
+        <div class="section-head"><div><p class="eyebrow">QUEST LOG</p><h2 id="storyTitle">La historia del Nombre</h2></div></div>
+        <div id="questLog" class="quest-log"></div>
+        <div id="sideQuestGrid" class="sidequest-grid"></div>
+        <div id="loreGrid" class="lore-grid"></div>
+      </section>
+
+      <section class="shop-panel pixel-frame" aria-labelledby="shopTitle">
+        <div class="section-head"><div><p class="eyebrow">LANTERN HOUSE</p><h2 id="shopTitle">Taller de Edda</h2></div><p>Mejoras permanentes. Saldo: <strong id="shopShards">000</strong> ◆</p></div>
+        <div id="shopGrid" class="shop-grid"></div>
+      </section>
+
+      <details class="bestiary-panel pixel-frame">
+        <summary><span><b>BESTIARY</b><small>Registro de criaturas, minibosses y guardianes</small></span><strong id="bestiaryCount">0/37</strong></summary>
+        <div id="bestiaryGrid" class="bestiary-grid"></div>
+      </details>
+
+      <section class="dungeon-panel">
+        <div class="section-head"><div><p class="eyebrow">DUNGEONS</p><h2>Ruta principal</h2></div><p>Estas fichas son registro de progreso. Para avanzar legítimamente entra en cada dungeon desde el overworld.</p></div>
+        <div id="chapterGrid" class="chapter-grid"></div>
+      </section>
+
+      <section class="achievement-panel pixel-frame">
+        <div class="section-head"><div><p class="eyebrow">ACHIEVEMENTS</p><h2>Logros</h2></div></div>
+        <div id="achievementGrid" class="achievement-grid"></div>
+      </section>
+    </section>
+
+    <section id="gameView" class="view game-view hidden" aria-labelledby="gameTitle">
+      <div class="game-shell" id="gameShell">
+        <div class="device-rail">
+          <button id="leaveGameBtn" class="device-utility" type="button" aria-label="Volver al campamento">← CAMP</button>
+          <div class="device-branding" aria-label="Pocket 404 DX"><strong>POCKET 404 <em>DX</em></strong><small>16-BIT HANDHELD CONSOLE</small></div>
+          <div class="device-edition"><span>16-BIT</span><span>DEFINITIVE EDITION</span></div>
+          <button id="fullscreenBtn" class="device-utility fullscreen-btn" type="button" aria-label="Pantalla completa">⛶ FULL</button>
+        </div>
+
+        <div class="handheld-layout touch-controls" aria-label="Consola y controles táctiles">
+          <aside class="control-wing control-wing-left" aria-label="Control direccional">
+            <div class="speaker-grille" aria-hidden="true"></div>
+            <div class="dpad"><button data-control="up" aria-label="Arriba">▲</button><button data-control="left" aria-label="Izquierda">◀</button><button data-control="down" aria-label="Abajo">▼</button><button data-control="right" aria-label="Derecha">▶</button></div>
+            <div class="wing-caption"><b>MOVE</b><span>WASD / ARROWS</span></div>
+          </aside>
+
+          <section class="screen-bezel" aria-label="Pantalla de juego">
+            <div class="screen-glass">
+              <div class="canvas-wrap">
+                <canvas id="gameCanvas" width="256" height="144" tabindex="0" aria-label="Rune Quest 404 DX. WASD o flechas para moverte, Z atacar o cargar, X defender/parry, Q cambiar arma, R activar runa, T cambiar runa, C o E interactuar."></canvas>
+                <div id="messageOverlay" class="message-overlay hidden" aria-live="polite"></div>
+              </div>
+            </div>
+
+            <div class="screen-console-meta" aria-live="polite">
+              <span id="chapterLabel">OVERWORLD</span>
+              <div class="screen-title-copy"><p id="areaLabel">VEYRA · OVERWORLD</p><h1 id="gameTitle">Lantern House</h1></div>
+              <span id="roomLabel">LANTERN HOUSE</span>
+            </div>
+
+            <div class="screen-status-row">
+              <span>256×144 · PIXEL PERFECT</span>
+              <span class="status-spacer" aria-hidden="true"></span>
+              <span id="fpsLabel">60 FPS</span>
+            </div>
+
+            <div class="system-controls" aria-label="Controles de sistema">
+              <button id="mapBtn" class="system-key" type="button" aria-label="Abrir mapa"><span class="system-main">SELECT</span><small>MAPA</small></button>
+              <button id="pauseBtn" class="system-key" type="button" aria-label="Pausar"><span class="system-main">START</span><small id="pauseBtnStatus">PAUSA</small></button>
+            </div>
+          </section>
+
+          <aside class="control-wing control-wing-right" aria-label="Botones de acción">
+            <div class="speaker-grille" aria-hidden="true"></div>
+            <div class="action-pad">
+              <button data-control="guard" class="btn-b" aria-label="Defender"><span>B</span><small>GUARD</small></button>
+              <button data-control="attack" class="btn-a" aria-label="Atacar"><span>A</span><small>ATTACK</small></button>
+              <button data-control="interact" class="btn-c" aria-label="Usar o hablar"><span>C</span><small>USE</small></button>
+            </div>
+            <div class="wing-caption"><b>EXPLORE</b><span>DISCOVER · GET LOST</span></div>
+          </aside>
+        </div>
+
+        <div class="hardware-legend" aria-label="Estado de la aventura">
+          <div class="legend-primary"><span>RUNE QUEST 404 DX</span><small>A WHOLE WORLD · INSIDE YOUR HANDS</small></div>
+          <div class="legend-compact"><span class="legend-label">VIDA</span><div id="heartHud" class="hearts"></div></div>
+          <div class="legend-compact"><span class="legend-label">SHARDS</span><b id="shardsHud">000</b></div>
+          <button id="weaponBtn" data-control="weapon" class="legend-action" type="button" aria-label="Cambiar arma"><span class="legend-label">ARMA · Q</span><b id="weaponBtnLabel">† TRAVELER BLADE</b><small id="weaponCount">1/7</small></button>
+          <div class="rune-action-group"><button id="runeBtn" data-control="rune" class="legend-action rune-action" type="button" aria-label="Activar runa equipada"><span class="legend-label">RUNA · R</span><b id="runeBtnLabel">SIN RUNA</b><small id="focusStatus"></small></button><button id="runeCycleBtn" data-control="runeCycle" class="rune-cycle-key" type="button" aria-label="Cambiar runa equipada"><b>↻</b><small>T</small></button></div>
+          <div class="legend-objective"><span class="legend-label">OBJETIVO</span><p id="objectiveHud">Explora Veyra.</p></div>
+        </div>
+
+        <div id="runtimeHud" class="runtime-hud" aria-hidden="true">
+          <span id="killsHud">000</span>
+          <div id="runeHud" class="rune-list"></div>
+          <div id="toolHud" class="item-list"></div>
+          <div id="relicHud" class="item-list"></div>
+          <div id="keyHud" class="item-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="endingView" class="view ending-view hidden" aria-labelledby="endingTitle">
+      <div class="ending-card pixel-frame">
+        <p class="eyebrow">RUNE QUEST 404 DX · CREDITS</p>
+        <h1 id="endingTitle">The Name Returns</h1>
+        <p id="endingText">Veyra recuerda por elección.</p>
+        <div id="endingStats" class="ending-stats"></div>
+        <div class="credits-roll" aria-label="Créditos">
+          <p>POCKET 404 · COMPLETE ADVENTURE EDITION</p><p>GAME & WORLD · ORIGINAL 404 UNIVERSE</p><p>DESIGN · CODE · PIXEL SYSTEMS · PROCEDURAL AUDIO</p><p>THANK YOU FOR REMEMBERING VEYRA</p>
+        </div>
+        <div class="hero-actions"><button id="postgameBtn" class="primary" type="button">VOLVER A VEYRA</button><button id="newGamePlusBtn" class="secondary" type="button">NEW GAME+</button></div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="settingsDialog" class="pixel-dialog">
+    <form method="dialog">
+      <div class="dialog-head"><h2>AJUSTES DX</h2><button value="close" aria-label="Cerrar">×</button></div>
+      <label class="toggle-row"><span><b>SCANLINES</b><small>Filtro CRT decorativo.</small></span><input id="scanToggle" type="checkbox" checked></label>
+      <label class="toggle-row"><span><b>REDUCIR MOVIMIENTO</b><small>Reduce transiciones de interfaz.</small></span><input id="motionToggle" type="checkbox"></label>
+      <label class="toggle-row"><span><b>ALTO CONTRASTE</b><small>Refuerza bordes y texto.</small></span><input id="contrastToggle" type="checkbox"></label>
+      <label class="toggle-row"><span><b>SONIDO</b><small>Audio sintetizado localmente.</small></span><input id="soundToggle" type="checkbox" checked></label>
+      <label class="toggle-row"><span><b>MÚSICA</b><small>Temas procedurales por región.</small></span><input id="musicToggle" type="checkbox" checked></label>
+      <label class="toggle-row"><span><b>EFECTOS</b><small>Combate, cofres, puertas y secretos.</small></span><input id="effectsToggle" type="checkbox" checked></label>
+      <label class="range-row"><span><b>MÚSICA</b><small id="musicVolumeValue">45%</small></span><input id="musicVolumeRange" type="range" min="0" max="100" value="45"></label>
+      <label class="range-row"><span><b>EFECTOS</b><small id="fxVolumeValue">65%</small></span><input id="fxVolumeRange" type="range" min="0" max="100" value="65"></label>
+    </form>
+  </dialog>
+
+  <dialog id="helpDialog" class="pixel-dialog">
+    <form method="dialog">
+      <div class="dialog-head"><h2>RUNE QUEST · CONTROLES</h2><button value="close" aria-label="Cerrar">×</button></div>
+      <div class="help-grid"><div><kbd>WASD</kbd><span>Mover</span></div><div><kbd>↑↓←→</kbd><span>Mover</span></div><div><kbd>Z</kbd><span>Atacar · mantener para cargar</span></div><div><kbd>X</kbd><span>Defender / parry</span></div><div><kbd>Q</kbd><span>Cambiar arma</span></div><div><kbd>R</kbd><span>Habilidad de runa</span></div><div><kbd>C / E</kbd><span>Usar / hablar</span></div><div><kbd>ENTER</kbd><span>Usar / diálogo</span></div><div><kbd>ESC</kbd><span>Pausa</span></div><div><kbd>MAPA</kbd><span>Consultar progreso</span></div></div>
+      <p>En móvil usa cruceta y A/B/C; los controles ARMA y RUNA bajo la consola permiten cambiar equipo, activar la habilidad actual y cambiar de runa con T o ↻. Cruza los bordes de la pantalla para viajar por el overworld. Las rutas bloqueadas indican qué herramienta necesitas. Todo el progreso se guarda localmente.</p>
+    </form>
+  </dialog>
+
+  <dialog id="mapDialog" class="pixel-dialog map-dialog">
+    <form method="dialog">
+      <div class="dialog-head"><h2>MAPA DE VEYRA</h2><button value="close" aria-label="Cerrar">×</button></div>
+      <p>Mapa de consulta. Solo muestra lugares descubiertos y dungeons conocidos; los secretos no se revelan automáticamente.</p>
+      <div id="mapDialogMap" class="world-map compact" aria-label="Mapa de Veyra"></div>
+    </form>
+  </dialog>
+
+  <dialog id="confirmDialog" class="pixel-dialog small-dialog">
+    <form method="dialog">
+      <div class="dialog-head"><h2>¿BORRAR SLOT?</h2></div><p>Se eliminará exclusivamente la ranura activa. Las otras dos partidas permanecerán intactas.</p>
+      <div class="dialog-actions"><button value="cancel" class="ghost">CANCELAR</button><button id="confirmResetBtn" value="confirm" class="danger">BORRAR</button></div>
+    </form>
+  </dialog>
+
+  <script src="js/bundle.js?v=6.1.0" defer></script>
+</body>
+</html>
