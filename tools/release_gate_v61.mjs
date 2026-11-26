@@ -102,6 +102,17 @@ const miniHp=CAMPAIGN.map(c=>c.rooms.find(r=>r.type==='miniboss').enemies[0][3])
   assert.equal(ref.value.completed.length,7);assert.equal(ref.value.runes.length,7);assert.equal(ref.value.weapons.length,7);assert.equal(ref.value.campaignComplete,true);assert.equal(ref.value.trueEnding,true);assert.equal(ref.value.creditsSeen,true);assert.equal(ref.value.equippedRune,'NULL');
 }
 
+// Every overworld edge must be traversable in both directions and return through the opposite boundary.
+const opposite={left:'right',right:'left',up:'down',down:'up'};
+for(const [id,room] of Object.entries(OVERWORLD_ROOMS)){
+  for(const [direction,neighbor] of Object.entries(room.neighbors||{})){
+    const target=typeof neighbor==='string'?neighbor:neighbor?.id;
+    assert.ok(OVERWORLD_ROOMS[target],`bad neighbor ${id}->${target}`);
+    const reverse=OVERWORLD_ROOMS[target].neighbors?.[opposite[direction]];
+    assert.equal(typeof reverse==='string'?reverse:reverse?.id,id,`one-way or mismatched overworld edge ${id} ${direction}->${target}`);
+  }
+}
+
 // Data integrity: every dungeon portal points to an existing chapter and every neighbor exists.
 for(const [id,room] of Object.entries(OVERWORLD_ROOMS)){
   if(room.portal)assert.ok(CAMPAIGN[room.portal.chapter],`bad portal ${id}`);
