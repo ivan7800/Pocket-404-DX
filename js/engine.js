@@ -611,7 +611,7 @@ export function defaultSave(){
   }
 
   drawPlayer(p){
-    const c=this.ctx,x=Math.round(p.x),y=Math.round(p.y),moving=!!(this.keys?.size);const step=moving?((this.frameCount>>3)&1):0;const bob=moving&&((this.frameCount>>3)&1)?-1:0;
+    const c=this.ctx,x=Math.round(p.x),y=Math.round(p.y),moving=!!(this.keys?.size||this.touch?.has('up')||this.touch?.has('down')||this.touch?.has('left')||this.touch?.has('right'));const step=moving?((this.frameCount>>3)&1):0;const bob=moving&&((this.frameCount>>3)&1)?-1:0;
     const flash=this.damageCd>0&&Math.floor(this.damageCd*18)%2===0;if(flash)c.globalAlpha=.35;
     // soft 16-bit shadow
     c.fillStyle='rgba(0,0,0,.20)';c.fillRect(x,y+11,10,2);c.fillStyle='rgba(0,0,0,.35)';c.fillRect(x+2,y+12,6,1);
