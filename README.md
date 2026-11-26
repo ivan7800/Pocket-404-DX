@@ -117,3 +117,12 @@ Es un homenaje espiritual a los action-adventure de 16 bits, no una reproducció
 ## Estado de validación
 
 Los módulos pasan comprobación sintáctica; se han verificado por pruebas de motor la migración de saves, arsenal, ataque cargado, parry, runas, IA especializada y progresión estructural de los 7 dungeons hasta True Ending. La validación interactiva completa de v6 en navegador real y una partida humana 0→créditos en hardware móvil siguen siendo comprobaciones manuales pendientes; consulta `QA_REPORT.md`.
+
+
+## v6.1.1 — Navegación y recuperación de controles
+
+- Corregidas las posiciones de entrada al cruzar puertas del overworld: el jugador aparece en el borde opuesto al de llegada.
+- Ajustadas conexiones para que cada salida tenga su retorno en la dirección opuesta; el release gate ahora valida todas las aristas.
+- Al perder foco o cambiar de pestaña se liberan teclas y controles táctiles retenidos antes de pausar.
+- El bundle se regenera desde los módulos fuente.
+- La regresión Chromium requiere navegador instalado; si no está disponible, se registra como no ejecutada y no como PASS.
