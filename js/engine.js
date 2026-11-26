@@ -88,7 +88,7 @@ export function defaultSave(){
     const room=OVERWORLD_ROOMS[id]||OVERWORLD_ROOMS['lantern-house'];const save=this.cb.getSave();
     this.areaMode='world';this.worldRoom=room;this.room=room;this.roomIndex=-1;this.chapterIndex=Math.max(0,Math.min(CAMPAIGN.length-1,save.currentChapter||0));
     const maxHp=this.maxHp(save),hp=fullHeal||!this.player?maxHp:Math.max(1,this.player.hp);
-    let x=28,y=78;if(entryDir==='left')x=228;if(entryDir==='right')x=18;if(entryDir==='up')y=120;if(entryDir==='down')y=24;
+    let x=28,y=78;if(entryDir==='left')x=18;if(entryDir==='right')x=228;if(entryDir==='up')y=24;if(entryDir==='down')y=120;
     this.player={x,y,w:9,h:11,hp,maxHp,facing:entryDir==='left'?'left':entryDir==='right'?'right':entryDir==='up'?'up':entryDir==='down'?'down':'right',speed:this.hasUpgrade('swift-boots')?74:64,attackCombo:0};
     this.enemies=[];this.projectiles=[];this.particles=[];this.pickups=[];this.roomHits=0;this.roomClear=false;this.transitionTimer=0;this.attackCd=0;this.attackHeld=false;this.attackHold=0;this.chargedReady=false;this.parryTimer=0;this.damageCd=0;this.invulnTimer=0;this.prismBarrierTimer=0;this.echoSlowTimer=0;this.nullReviveUsed=false;this.verdantHealed=false;
     this.obstacles=this.makeObstacles(room.layout);this.switches=[];this.toolTargets=[];this.chest=null;this.npc=null;this.npcs=(room.npcs||[]).map(n=>({...n,w:9,h:12}));
