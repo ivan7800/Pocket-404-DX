@@ -77,11 +77,9 @@ export function defaultSave(){
     const save=this.cb.getSave();
     if(save.currentMode==='dungeon'&&CAMPAIGN[save.currentChapter]){
       this.chapterIndex=clamp(save.currentChapter||0,0,CAMPAIGN.length-1);this.loadRoom(clamp(save.currentRoom||0,0,CAMPAIGN[this.chapterIndex].rooms.length-1),true);
-      this.queueMessages([`RETURN · ${CAMPAIGN[this.chapterIndex].name.toUpperCase()}`,this.objectiveText()],null);
       return;
     }
     this.loadWorldRoom(save.currentWorld||'lantern-house',null,true);
-    this.queueMessages([`RETURN · ${(this.worldRoom?.name||'VEYRA').toUpperCase()}`,this.objectiveText()],null);
   }
 
   loadWorldRoom(id,entryDir=null,fullHeal=false){
@@ -166,7 +164,7 @@ export function defaultSave(){
   resumeCampaign(){
     const save=this.cb.getSave();
     const ci=clamp(save.currentChapter||0,0,CAMPAIGN.length-1);const maxRoom=Math.max(0,CAMPAIGN[ci].rooms.length-1);const ri=clamp(save.currentRoom||0,0,maxRoom);
-    this.chapterIndex=ci;this.loadRoom(ri,true);this.queueMessages([`RETURN · ${CAMPAIGN[ci].name.toUpperCase()}`,...(this.room.enter||[]),this.objectiveText()],null);
+    this.chapterIndex=ci;this.loadRoom(ri,true);
   }
 
   loadRoom(index,fullHeal=false){
