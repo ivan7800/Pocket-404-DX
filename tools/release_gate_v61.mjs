@@ -28,6 +28,14 @@ assert.equal(CAMPAIGN.reduce((n,c)=>n+c.rooms.length,0),51);
 const migrated=normalizeSave({schema:5,runes:['VERDANT','EMBER'],completed:['moss-gate','sunken-forge'],weapons:['traveler-blade','briar-cleaver','ember-sabre'],equippedWeapon:'ember-sabre'});
 assert.equal(migrated.schema,6);assert.equal(migrated.equippedRune,'EMBER');assert.equal(migrated.equippedWeapon,'ember-sabre');
 
+// Continue must return straight to play; a blocking RETURN dialogue made the game appear frozen.
+{
+  const ref={value:normalizeSave(defaultSave())}; const e=makeEngine(ref);
+  e.resumeAdventure();assert.equal(e.areaMode,'world');assert.equal(e.mode,'playing');assert.equal(e.messages.length,0);
+  ref.value.currentMode='dungeon';ref.value.currentChapter=0;ref.value.currentRoom=1;
+  e.resumeAdventure();assert.equal(e.areaMode,'dungeon');assert.equal(e.roomIndex,1);assert.equal(e.mode,'playing');assert.equal(e.messages.length,0);
+}
+
 // Persistence round-trip with an in-memory localStorage implementation.
 {
   const mem=new Map();globalThis.localStorage={getItem:k=>mem.has(k)?mem.get(k):null,setItem:(k,v)=>mem.set(k,String(v)),removeItem:k=>mem.delete(k)};
